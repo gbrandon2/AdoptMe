@@ -1,100 +1,155 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--- Boostrap-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<!---Estilo sidebar---->
+<link href="{{asset('css/app.css')}}" rel="stylesheet">
+<!---FontAwesome--->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
-        <title>Laravel</title>
+<body>
+    <div class="wrapper">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Nombre de usuario</h3>
 
-            .full-height {
-                height: 100vh;
-            }
+               
+            </div>
+            <img src=" {!! asset('imagenes/7285.jpg') !!}" class="img-fluid rounded-circle" alt="Responsive image">
+            <ul class="list-unstyled components">
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+                <li>
+                    <a href="#">Usuario</a>
+                </li>
 
-            .position-ref {
-                position: relative;
-            }
+                <li>
+                    <a href="#">Publicar</a>
+                </li>
+                <li>
+                    <a href="#">Editar perfil</a>
+                </li>
+            </ul>
+        </nav>
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
 
-            .content {
-                text-align: center;
-            }
+                    </button>
 
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
                 </div>
-            @endif
+            </nav>
+            <div id="upload-box">
+                <form action="upload" method="POST">
+                    <section class="box">
+                        <section class="inner-box">
+                            <h5><strong>Categoria</strong> </h5>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb" style="height: 50px">
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+                                    <!--<li class="breadcrumb-item"><a href="#">Home</a></li>-->
+                                    <li class="breadcrumb-item active" aria-current="page">Categoria elegida</li>
+                                    <input name="cate" type="hidden">
+                                </ol>
+                            </nav>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                            <label for="f" class="h"> <i class="fas fa-camera" style="font-size:3em"></i>
+                                <p>Agregar foto</p>
+                            </label>
+                            <input required id="f" type="file" name="img">
+                            <div class="form-group row">
+                                <div class="input-group col-sm-8">
+                                    <div class="input-group-prepend ">
+                                        <span class="input-group-text ic" id="basic-addon1"><i class="fas fa-paw"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Titulo" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="input-group col-sm-5">
+                                    <div class="input-group-prepend ">
+                                        <span class="input-group-text ic" id="basic-addon1"><i class="fas fa-map-signs"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Barrio" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <div class="input-group col-sm-2">
+                                    <label class="col-sm-2 col-form-label" style="text-align: right; color: #999; font-weight: bold;">Adicional</label>
+                                </div>
+                                <div class="input-group col-sm-3">
+                                    <div class="input-group-prepend ">
+                                        <span class="input-group-text ic" id="basic-addon1"><i class="fas fa-weight"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Peso" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group col-sm-3">
+                                    <div class="input-group-prepend ">
+                                        <span class="input-group-text ic" id="basic-addon1"><i class="fas fa-weight"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Edad" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+
+
+                            </div>
+                            <div class="form-group row">
+                                <div class="input-group col-sm-2">
+                                    <label class="col-sm-2 col-form-label" style="text-align: right; color: #999; font-weight: bold;">Especie</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <select required class="form-control" name="city" id="">
+                                        <option value="Barranquilla">Perro</option>
+                                        <option value="Bogota">Gato</option>
+                                        <option value="cali">Otro</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                            <div class="input-group col-sm-2">
+                                    <label class="col-sm-2 col-form-label" style="text-align: right; color: #999; font-weight: bold;">Descripcion</label>
+                                </div>
+                                
+                               
+                                <div class="col-sm-10">
+                                    <textarea required class="form-control" name="descrip" id="" cols="30" rows="10"></textarea>
+                                </div>
+                            </div>
+
+                        </section>
+                        <div class="end">
+    
+        <button type="submit" name="sub" class="btn btn-info" >Continuar</button>
+        <a href="subir.php"> volver</a>
+      
+      
+    </div>
+                    </section>
+                </form>
             </div>
         </div>
-    </body>
+
+
+    </div>
+    </div>
+
+    <!-- Page Content -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $('#content').toggleClass('active')
+            });
+        });
+    </script>
+</body>
+
 </html>
