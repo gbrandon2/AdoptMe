@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 .wrapper {
   display: flex;
   width: 100%;
@@ -67,10 +69,81 @@
   width: calc(100% - 250px);
   padding: 0px;
   min-height: 100vh;
-  transition: all 0.3s;
+  transition: left 2s;
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.wrapper #content #progressBar {
+  position: relative;
+  z-index: 1;
+  width: 70%;
+  padding: 10px;
+  margin: auto;
+}
+
+.wrapper #content #progressBar #stepa {
+  left: 10%;
+}
+
+.wrapper #content #progressBar #stepa h6::before {
+  font-family: "Font Awesome 5 Brands";
+  content: "\F430";
+  display: block;
+}
+
+.wrapper #content #progressBar #stepb {
+  left: 20%;
+}
+
+.wrapper #content #progressBar #stepb h6::before {
+  transition: background-color 2s, color 2s;
+  font-family: "Font Awesome 5 Free";
+  content: "\F044";
+  display: block;
+}
+
+.wrapper #content #progressBar #stepb h6::after {
+  background-position: right bottom;
+  content: "";
+  width: 100%;
+  height: 5px;
+  top: 0.5pc;
+  left: -47%;
+  background-color: white;
+  position: absolute;
+  transition: all 1s ease-out;
+  z-index: -1;
+}
+
+.wrapper #content #progressBar #stepb h6.step::after {
+  background-position: left bottom;
+  background-color: green;
+}
+
+.wrapper #content #progressBar h6 {
+  color: #fff;
+  text-align: center;
+}
+
+.wrapper #content #progressBar h6::before {
+  width: 40px;
+  height: 25px;
+  margin: auto;
+  left: 10%;
+  color: #76c04e;
+  background-color: #fff;
+  border-radius: 3px;
+}
+
+.wrapper #content #progressBar h6.step {
+  color: green;
+}
+
+.wrapper #content #progressBar h6.step::before {
+  color: #fff;
+  background-color: green;
 }
 
 .wrapper #content #upload-box {
@@ -85,11 +158,12 @@
   overflow: hidden;
 }
 
-.wrapper #content #upload-box .box .inner-box {
+.wrapper #content #upload-box .box #inner-box {
+  transition: all 3s linear;
   padding: 60px;
 }
 
-.wrapper #content #upload-box .box .inner-box .h {
+.wrapper #content #upload-box .box #inner-box .h {
   border: solid 1px lightgray;
   color: lightgray;
   display: flex;
@@ -103,30 +177,57 @@
   font-family: arial;
 }
 
-.wrapper #content #upload-box .box .inner-box .h:hover {
-  background-color: #3483fa;
+.wrapper #content #upload-box .box #inner-box .h:hover {
+  background-color: #76c04e;
   color: #fff;
   height: 120px;
-  outline-color: #3483fa;
+  outline-color: #76c04e;
   cursor: pointer;
 }
 
-.wrapper #content #upload-box .box .inner-box .ic {
+.wrapper #content #upload-box .box #inner-box .ic {
   background: #76c04e;
   color: #fff;
 }
 
-.wrapper #content #upload-box .box .end {
+.wrapper #content #upload-box .box #end {
   background-color: lightgray;
   height: 10%;
   width: 100%;
   padding: 5px;
 }
 
+.wrapper #content .categoriaBox {
+  border: solid 1px lightgray;
+  height: 230px;
+  width: 200px;
+  padding: 5px;
+  box-shadow: 5px 5px 10px #76c04e;
+  border-radius: 10px;
+}
+
+.wrapper #content .categoriaBox h4 {
+  color: #76c04e;
+}
+
+.wrapper #content .categoriaBox:hover {
+  background-color: #76c04e;
+  box-shadow: yellowgreen;
+}
+
+.wrapper #content .categoriaBox:hover h4 {
+  color: white;
+}
+
 .wrapper #content input[type=file] {
   opacity: 1;
   z-index: -1;
   position: absulte;
+  display: none;
+}
+
+.notV {
+  left: 10px;
   display: none;
 }
 
