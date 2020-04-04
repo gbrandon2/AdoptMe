@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'UploadController@index');
+Route::post('/addPet','UploadController@storePet')->name('addPet');
+Route::post('/addAcc','UploadController@storeAcc')->name('addAcc');
 

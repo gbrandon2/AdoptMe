@@ -1,5 +1,4 @@
 @extends('layouts.upload')
-@
 @section('header')
 <!DOCTYPE html>
 
@@ -25,7 +24,7 @@
 
 
     </div>
-    <!---            <img src=" {!! asset('imagenes/7285.jpg') !!}" class="img-fluid rounded-circle " alt="Responsive image">--->
+     <!---            <img src=" {!! asset('imagenes/7285.jpg') !!}" class="img-fluid rounded-circle " alt="Responsive image">--->
     <img src=" {!! asset('imagenes/7285.jpg') !!}" class="img-fluid thumbnail" alt="Responsive image">
     <ul class="list-unstyled components">
 
@@ -38,34 +37,41 @@
         </li>
         <li>
             <a href="#">Editar perfil</a>
-        </li>
+         </li>
     </ul>
 </nav>
 @endsection
 <!---Subir mascotas-->
 @section('subirPet')
-<section class="box">
-                        <section class="inner-box">
+<div id="mascota" class="notV">
+    <form action="{{ route('addPet') }}" method="POST" enctype="multipart/form-data">
+    @csrf 
+                        <section id="inner-box">
                             <h5><strong>Categoria</strong> </h5>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb" style="height: 50px">
 
                                     <!--<li class="breadcrumb-item"><a href="#">Home</a></li>-->
-                                    <li class="breadcrumb-item active" aria-current="page">Categoria elegida</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Mascota</li>
                                     <input name="cate" type="hidden">
                                 </ol>
                             </nav>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                <label for="f" class="h"> <i class="fas fa-camera" style="font-size:3em"></i><p>Agregar foto</p></label>
 
-                            <label for="f" class="h"> <i class="fas fa-camera" style="font-size:3em"></i>
-                                <p>Agregar foto</p>
-                            </label>
-                            <input required id="f" type="file" name="img">
+                                <input  id="f" type="file" name="ima" class="f" >
+                                </div>
+                                <div class="col-sm-8 preview">
+                           
+                                </div>
+                            </div> 
                             <div class="form-group row">
                                 <div class="input-group col-sm-8">
                                     <div class="input-group-prepend ">
                                         <span class="input-group-text ic" id="basic-addon1"><i class="fas fa-paw"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Titulo" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text"  name="tit" class="form-control" placeholder="Titulo"  aria-describedby="basic-addon1">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -73,7 +79,7 @@
                                     <div class="input-group-prepend ">
                                         <span class="input-group-text ic" id="basic-addon1"><i class="fas fa-map-signs"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Barrio" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input  required type="text" name="lugar" class="form-control" placeholder="Barrio" aria-describedby="basic-addon1">
                                 </div>
 
                             </div>
@@ -85,13 +91,13 @@
                                     <div class="input-group-prepend ">
                                         <span class="input-group-text ic" id="basic-addon1"><i class="fas fa-weight"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Peso" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input required required type="text" name="peso" class="form-control" placeholder="Peso"  aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group col-sm-3">
                                     <div class="input-group-prepend ">
                                         <span class="input-group-text ic" id="basic-addon1"><i class="fas fa-weight"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Edad" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input  required type="text" name="edad" class="form-control" placeholder="Edad" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
 
 
@@ -101,10 +107,10 @@
                                     <label class="col-sm-2 col-form-label" style="text-align: right; color: #999; font-weight: bold;">Especie</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <select required class="form-control" name="city" id="">
-                                        <option value="Barranquilla">Perro</option>
-                                        <option value="Bogota">Gato</option>
-                                        <option value="cali">Otro</option>
+                                    <select required class="form-control" name="especie" id="">
+                                        <option value="Perro">Perro</option>
+                                        <option value="Gato">Gato</option>
+                                        <option value="Otro">Otro</option>
 
                                     </select>
                                 </div>
@@ -121,39 +127,52 @@
                             </div>
 
                         </section>
-                        <div class="end">
+                        <div id="end">
     
-        <button type="submit" name="sub" class="btn btn-info" >Continuar</button>
-        <a href="subir.php"> volver</a>
-      
-      
-    </div>
-                    </section>
-@endsection
+                            <button type="submit" name="sub" class="btn btn-info" >Continuar</button>
+                            <a href="" id="stepBack" onclick="stepBack(event,'mascota')"> volver</a>
+                          
+                          
+                        </div>
+                              
+                    
+                    </form>     
+</div>
+                    @endsection
 <!---Subir Accesorios--->
 @section('subirAcc')
-
-                        <section id="inner-box" class="notV">
+<div id="subirAcce" class="notV">
+    <form action="{{ route('addAcc') }}" method="POST" enctype="multipart/form-data">
+    @csrf 
+                        <section id="inner-box">
                             <h5><strong>Categoria</strong> </h5>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb" style="height: 50px">
 
                                     <!--<li class="breadcrumb-item"><a href="#">Home</a></li>-->
-                                    <li class="breadcrumb-item active" aria-current="page">Categoria elegida</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Accesorios</li>
                                     <input name="cate" type="hidden">
                                 </ol>
                             </nav>
 
-                            <label for="f" class="h"> <i class="fas fa-camera" style="font-size:3em"></i>
-                                <p>Agregar foto</p>
-                            </label>
-                            <input required id="f" type="file" name="img">
+                           <div class="row">
+                                    <div class="col-sm-2">
+                                        <label for="f2" class="h"> <i class="fas fa-camera" style="font-size:3em"></i>
+                                        <p>Agregar foto</p>
+                                        </label>
+
+                                        <input required id="f2" type="file" name="ima" class="f" >
+                                    </div>
+                                    <div class="col-sm-8 preview">
+                           
+                                    </div>
+                            </div> 
                             <div class="form-group row">
                                 <div class="input-group col-sm-8">
                                     <div class="input-group-prepend ">
                                         <span class="input-group-text ic" id="basic-addon1"><i class="fas fa-paw"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Titulo" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="Titulo"  name="titulo" aria-describedby="basic-addon1">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -161,7 +180,7 @@
                                     <div class="input-group-prepend ">
                                         <span class="input-group-text ic" id="basic-addon1"><i class="fas fa-map-signs"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Barrio" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="Barrio" required name="barrio" aria-describedby="basic-addon1">
                                 </div>
 
                             </div>
@@ -171,7 +190,7 @@
                                     <div class="input-group-prepend ">
                                         <span class="input-group-text ic" id="basic-addon1"><i class="fas fa-money-bill-wave-alt"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Precio" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="Precio" required name="precio" aria-describedby="basic-addon1">
                                 </div>
 
 
@@ -184,16 +203,20 @@
                                 
                                
                                 <div class="col-sm-10">
-                                    <textarea required class="form-control" name="descrip" id="" cols="30" rows="10"></textarea>
+                                    <textarea required class="form-control" name="descrip"  id="" cols="30" rows="10"></textarea>
                                 </div>
                             </div>
 
                         </section>
-                        <div id="end"class="notV">
+                        <div id="end">
     
-        <button type="submit" name="sub" class="btn btn-info" >Continuar</button>
-        <a href="" id="stepBack" onclick="stepBack(event)"> volver</a>
-      
+                            <button type="submit" name="sub" class="btn btn-info" >Continuar</button>
+                            <a href="" id="stepBack" onclick="stepBack(event,'subirAcce')"> volver</a>
+                          
+                          
+                        </div>
+                              
+    </form>
       
     </div>
               

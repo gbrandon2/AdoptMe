@@ -19289,13 +19289,20 @@ $(document).ready(function () {
     $('#content').toggleClass('active');
   });
 });
-$('#stepBack').click(function (event) {
-  event.preventDefault();
+$('#imgIn').change(function () {
+  var ainput = document.getElementById('imgIn');
+  alert('algo');
+});
+$(document).ready(function () {
+  $('#Masc').on('click', function () {
+    $('#mascota').toggleClass('notV');
+    $('#stepb h6').toggleClass('step');
+    $('#category').toggleClass('notV');
+  });
 });
 $(document).ready(function () {
   $('#Acc').on('click', function cambiarS() {
-    $('#inner-box').toggleClass('notV');
-    $('#end').toggleClass('notV');
+    $('#subirAcce').toggleClass('notV');
     $('#stepb h6').toggleClass('step');
     $('#category').toggleClass('notV');
   });

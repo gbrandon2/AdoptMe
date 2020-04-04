@@ -16,7 +16,7 @@
                         <i class="fas fa-align-left"></i>
 
                     </button>
-
+                    aqui va el header y cambiar de color
                 </div>
             </nav>
             <div id="progressBar">
@@ -36,31 +36,62 @@
                </div>
             </div>
             <div id="upload-box">
-                <form action="upload" method="POST">
+              
                 <section class="box" style="background:#fff">
 
                     @section('categoria')
                     @show
+                @section('subirPet')
+                @show
                 @section('subirAcc')
                 @show
-               
-               
+              
+              
             </section>
-            <form>
+        
             </div>
         </div>
     </div>
 
 </body>
 <script  src="{{ asset('js/app.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
   <script>
                 
-    function stepBack(event){
+    function stepBack(event,pram2) {
         event.preventDefault();
-          $('#inner-box').toggleClass('notV');
-       $('#end').toggleClass('notV');
-       $('#stepb h6').toggleClass('step');
-       $('#category').toggleClass('notV')
-    }
-                </script>    
+        $('#'+pram2).toggleClass('notV');
+      
+        $('#stepb h6').toggleClass('step');
+        $('#category').toggleClass('notV')
+}
+(function(){
+ function filePreview(input){
+     
+  if(input.files && input.files[0]){
+    
+   var reader = new FileReader();
+   reader.onload=function(e){
+    $('.preview').html( '<img src="'+e.target.result+'" style=" width: 120px;height: 120px; margin:auto" class="img-fluid thumbnail" alt="Responsive image">');    
+   }
+  
+
+   reader.readAsDataURL(input.files[0]);
+ }
+ }
+ 
+ $('.f').change(function(){
+    
+  filePreview(this);
+  
+  });
+ 
+})();
+
+    
+    
+  
+
+ </script>    
 </html>
