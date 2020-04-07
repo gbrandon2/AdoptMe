@@ -49,12 +49,12 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        
+        //dd($data);
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            //'phone' => ['required'],
+            'password' => ['required', 'string', 'min:8'],
+            'phone' => ['required', 'string', 'min:8']
         ]);
     }
 
@@ -66,7 +66,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        dd($data);
+        //dd($data);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -74,7 +74,6 @@ class RegisterController extends Controller
 
             //Custom Fields
             'phone' => $data['phone'],
-
         ]);
     }
 }

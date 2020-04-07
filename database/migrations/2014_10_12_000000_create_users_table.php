@@ -20,8 +20,12 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone');
-            //$table->string('usertype',['0','1'])->default('0'); //0:Person  1:Organization
-            $table->string('address')->nullable();
+            $table->string('usertype')->default('0'); //0:Person  1:Organization //Can use ->enum('usertype',['person','foundation'])
+            $table->string('address')->nullable()->default('');
+            $table->string('profile_image')->nullable()->default('');
+            $table->string('facebook')->nullable()->default('');
+            $table->string('form')->nullable()->default('');
+            
             $table->rememberToken();
             $table->timestamps();
         });
