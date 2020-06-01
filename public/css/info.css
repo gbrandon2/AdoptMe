@@ -1,0 +1,42 @@
+.content h1 {
+  color: #00a8de;
+}
+
+.content h3 {
+  color: #00a8de;
+}
+
+.content .row {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.content #action {
+  position: relative;
+  top: 30%;
+  width: 450px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.content #action button {
+  margin: 10px 0px 10px 0px;
+  width: 100%;
+}
+
+.content #action h5 {
+  color: #4d4d4d;
+}
+
+.content #emails {
+  position: relative;
+  top: 13%;
+}
+
+.modal-dialog {
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 1000000px;
+  max-width: 10000000px;
+}
+

@@ -13,21 +13,26 @@
 .wrapper #sidebar {
   width: 250px;
   position: fixed;
-  top: 0;
+  top: 54px;
   left: 0;
   height: 100vh;
   z-index: 999;
-  background: #76c04e;
+  background: #082B49;
   color: #fff;
   transition: all 0.3s;
 }
 
 .wrapper #sidebar .sidebar-header {
-  background: #7bc952;
+  height: 190px;
+  display: block;
+  margin: auto;
+  background-position: center;
+  background-size: cover;
 }
 
 .wrapper #sidebar img {
-  height: 250px;
+  height: 100px;
+  width: 100px;
   padding: 5px;
 }
 
@@ -68,10 +73,9 @@
 .wrapper #content {
   width: calc(100% - 250px);
   padding: 0px;
-  min-height: 100vh;
   transition: left 2s;
   position: absolute;
-  top: 0;
+  top: 54;
   right: 0;
 }
 

@@ -36,6 +36,27 @@ $(document).ready(function () {
     
 });
 
+$(document).ready(function () {
+    $('#serv').on('click', function cambiarS() {
+       $('#subirServ').toggleClass('notV');
+     
+       $('#stepb h6').toggleClass('step');
+       $('#category').toggleClass('notV')
+     
+    });
+    
+});
+$(document).ready(function () {
+    $('#Ev').on('click', function cambiarS() {
+       $('#subirEv').toggleClass('notV');
+     
+       $('#stepb h6').toggleClass('step');
+       $('#category').toggleClass('notV')
+     
+    });
+    
+});
+
 
 
 
