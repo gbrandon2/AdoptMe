@@ -10,6 +10,12 @@
       });
       </script>
     @endif
+    <div class="row" style="margin-left: 0px;margin-right:0px;">
+      <div class="col" style="padding-left: 0px;padding-right:0px ;margin-bottom:10px">
+        @include("layouts.components.navbar")
+        @yield("navBar")
+    </div>
+    </div>
     <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
       <div class="toast" style="position: absolute; top: 0; right: 0;">
         <div class="toast-header">
@@ -29,7 +35,8 @@
     
     </div>
     
-    <body style="background-color:#e3e6e9">
+    <body style="background-color:#e3e6e9;font-family: Quicksand, sans-serif">
+    
         @section('content')
         @show
         @section('Participantes')

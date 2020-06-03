@@ -9,20 +9,57 @@ Use App\Answer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class PostController extends Controller
 {   
      
     public function  index() {
+       
+      if(Auth::check()){
+        return view('app');
+      }else {
+          return view('home');
+      }
+    }
+    public function upload(){
         return view('upload');
+    }
+   
+    public function user(){
+        $user=Auth::user();
+        if(Auth::check()){
+        $pets=DB::table('pets')->where('email_master','like',$user->email)
+        ->orderBy('id', 'DESC')->limit(4)->get();
+        $accesori=DB::table('accesories')->where('email','like','algo')
+                                        ->where('posttype','=',2)->orderBy('id', 'DESC')->limit(4)->get();
+        $service=DB::table('accesories')->where('email','like','algo')
+                                        ->where('posttype','==',1)->orderBy('id', 'DESC')->limit(4)->get();
+                                    }else{
+                                        $pets=DB::table('pets')->where('email_master','like','algo')
+                                        ->orderBy('id', 'DESC')->limit(4)->get();
+                                        $accesori=DB::table('accesories')->where('email','like','algo')
+                                                                        ->where('posttype','=',2)->orderBy('id', 'DESC')->limit(4)->get();
+                                        $service=DB::table('accesories')->where('email','like','algo')
+                                                                        ->where('posttype','==',1)->orderBy('id', 'DESC')->limit(4)->get();
+                                        }
+        return view('user1',['pets'=>$pets,'accesories'=>$accesori,'services'=>$service,'user'=>$user]);
     }
     public function storePet(Request $request){
         $pet=new Pet;
-        $pet->email_master="algo";
+
+   
         $pet->titulo=$request->input("tit");
-        $pet->especie=$request->especie;
+        $pet->especie=$request->especie; 
+        if(Auth::check()){
+            $pet->email_master=Auth::user()->email;
+        $pet->email_nue=Auth::user()->email;}
+            else{
+                $pet->email_master="algo";
         $pet->email_nue="algo";
+            }
+           
         if($request->hasFile('img')){
             $file=$request->file('img');
             $extension=$file->getClientOriginalExtension();
@@ -37,17 +74,22 @@ class PostController extends Controller
         $pet->description=$request->input("descrip");
         $pet->direccion=$request->input("lugar");
       $pet->save();
-      return redirect('/');
+      return back();
 
     }
     public function storeAcc(Request $r){
         $acc=new Accesory;
-        $acc->email="algo";
+    
+        if(Auth::check()){
+            $acc->email=Auth::user()->email;}
+            else{
+                $acc->email="algo";
+            }
         $acc->barrio=$r->input("barrio");
         $acc->precio=$r->input("precio");
         $acc->descripcion=$r->input("descrip");
         $acc->titul=$r->input("titulo");
-        $acc->posttype=1;
+        $acc->posttype=2;
         if($r->hasFile('ima')){
             $file=$r->file('ima');
             $extension=$file->getClientOriginalExtension();
@@ -58,16 +100,20 @@ class PostController extends Controller
             $acc->imag="nofunion";
         }
         $acc->save();
-        return redirect('/');
+        return back();
     }
     public function storeServ(Request $r){
         $acc=new Accesory;
-        $acc->email="algo";
+        if(Auth::check()){
+        $acc->email=Auth::user()->email;}
+        else{
+            $acc->email="algo";
+        }
         $acc->barrio=$r->input("lugar");
         $acc->precio=$r->input("preci");
         $acc->descripcion=$r->input("descri");
         $acc->titul=$r->input("titul");
-        $acc->posttype=2;
+        $acc->posttype=1;
         if($r->hasFile('im')){
             $file=$r->file('im');
             $extension=$file->getClientOriginalExtension();
@@ -78,22 +124,26 @@ class PostController extends Controller
             $acc->imag="nofunion";
         }
         $acc->save();
-        return redirect('/');
+        return back();
     }
 
 
 public function storeEv(Request $r){
     $acc=new Event;
-    $acc->emailEvt="algo";
-    $acc->dirEvt=$r->input("DirEvt");
-    $time = strtotime($r->input("date"));
+    if(Auth::check()){
+    $acc->emailEvt=Auth::user()->email;}else
+    {
+    $acc->emailEvt="algo";}
 
+    $acc->dirEvt=$r->input("DirEvt");
+    $time = $r->input("date");
+    
 
     $acc->descripcionEvt=$r->input("descEvt");
     $acc->TitulEvt=$r->input("titulEvt");
-
+   
     $acc->evtDate=$time;
-    if($r->hasFile('im')){
+    if($r->hasFile('imEvt')){
         $file=$r->file('imEvt');
         $extension=$file->getClientOriginalExtension();
         $filename=time().'.'.$extension;
@@ -103,7 +153,7 @@ public function storeEv(Request $r){
         $acc->imagEvt="nofunion";
     }
     $acc->save();
-    return redirect('/');
+    return back();
 }
 public function petInfo(Request $request ){
     if($request->has('id')){
@@ -111,11 +161,66 @@ public function petInfo(Request $request ){
         $pet=DB::table('pets')->find($request->get('id'));
       
         
+
         $pets=DB::table('pets')->where('id','<>',$request->get('id'))
                                     ->orderBy('id', 'DESC')->limit(4)->get();
                         
         $emails=DB::table('answers')->where('idPet',$request->get('id'))->get();
         return view('petInfo',['pet'=>$pet,'pets'=>$pets,'emails'=>$emails]);
+    }
+}
+
+public function searchAcc(Request $request )
+{
+    if($request->has('search')){
+        $acc=DB::table('accesories')->where('descripcion','like','%'.$request->get('search').'%')
+                                    ->where('posttype','=',2)
+                                    ->orWhere('titul','like','%'.$request->get('search').'%')
+                                     ->paginate(5)->appends('search',$request->get('search'));
+        return view("accesory")->with(['acc'=>$acc]);
+    }
+    else{
+        $acc=DB::table('accesories')->where('posttype',2) ->paginate(5);
+        return view("accesory")->with(['acc'=>$acc]);
+    }
+}
+public function searchEv(Request $request){
+    if($request->has('search')){
+        $evt=DB::table('events')->where('descripcion','like','%'.$request->get('search').'%') 
+                                ->orWhere('titul','like','%'.$request->get('search').'%')
+                                ->paginate(5)->appends('search',$request->get('search'));
+                                return view("event")->with(['evt'=>$evt]);
+
+    }else{
+        $evt=DB::table('events')->paginate(5);
+        return view("event")->with(['evt'=>$evt]);
+    }
+}
+public function evtInf(Request $request){
+    if($request->has('id')){
+  
+        $ev=DB::table('events')->find($request->get('id'));
+      
+        
+        $evt=DB::table('events')->where('id','<>',$request->get('id'))
+                                
+                        ->orderBy('id', 'DESC')->limit(4)->get();
+
+        return view('evtInfo',['ev'=>$ev,'evt'=>$evt]);
+    }
+}
+public function accInf(Request $request){
+
+    if($request->has('id')){
+  
+        $acce=DB::table('accesories')->find($request->get('id'));
+      
+        
+        $acc=DB::table('accesories')->where('id','<>',$request->get('id'))
+                                ->where('posttype',2)
+                                ->orderBy('id', 'DESC')->limit(4)->get();
+
+        return view('accInfo',['acce'=>$acce,'acc'=>$acc]);
     }
 }
 public function searchPets(Request $request){
@@ -188,7 +293,8 @@ public function saveSurvey(Request $request){
           $ans->respuesta7=$request->get('pregunta7');
         $pos =  substr(URL::full(), strpos(URL::full(), "y")+2, strlen ( URL::full() ));  
         $ans->idPEt=$pos;
-        $ans->email_user="otro";
+    
+        $ans->email_user=Auth::user()->email;;
         $ans->save();
     } catch (\Illuminate\Database\QueryException $ex) {
    
@@ -203,7 +309,7 @@ public function newOwner($id,$emailn){
     try {
    DB::table('pets')
               ->where('id', $id)
-              ->update(['email_nue' => $emailn]);
+              ->update(['email_nue' => Auth::user()->email]);
             } catch (\Illuminate\Database\QueryException $ex) {
    
 

@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <!-- style CSS -->
+    <link rel="stylesheet" href="css/style.css" />
     <!---Estilo sidebar---->
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
     <!---FontAwesome--->
@@ -397,7 +401,7 @@
 @section('categoria')
     
       <section id="category">
-                <h3 align="center" style="color:#76c04e;padding:10px"><strong>Escoja la categoria</strong> </h3>
+                <h3 align="center" style="color:#53c9bb;padding:10px"><strong>Escoja la categoria</strong> </h3>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb" style="height: 50px">
 
@@ -406,6 +410,8 @@
                         <input name="cate" type="hidden">
                     </ol>
                 </nav>
+                @if(Auth::check())
+                
                 <div class="row" style="padding:20px;">
                     <div class="col-sm " id="serv">
                         <div class="categoriaBox" onclick="">
@@ -420,6 +426,7 @@
                             <h4 align="center">Mascota</h4>
                         </div>
                     </div>
+                    @if(Auth::user()->userType==0)
                     <div class="col-sm">
                         <div class="categoriaBox" id="Acc">
                             <img src=" https://image.flaticon.com/icons/svg/1688/1688063.svg" class="img-fluid" alt="Responsive image">
@@ -434,10 +441,43 @@
 
                         </div>
                     </div>
+                    @endif
                 </div>
 
+                 @else   
+                 
+                <div class="row" style="padding:20px;">
+                    <div class="col-sm " id="serv">
+                        <div class="categoriaBox" onclick="">
+                            <img src=" https://image.flaticon.com/icons/svg/2699/2699926.svg" class="img-fluid" alt="Responsive image">
+                           <h4 align="center">Servicio</h4>
+                        </div>
 
+                    </div>
+                    <div class="col-sm">
+                        <div class="categoriaBox" id="Masc">
+                            <img src="https://image.flaticon.com/icons/svg/1167/1167628.svg" class="img-fluid" alt="Responsive image">
+                            <h4 align="center">Mascota</h4>
+                        </div>
+                    </div>
+                   
+                    <div class="col-sm">
+                        <div class="categoriaBox" id="Acc">
+                            <img src=" https://image.flaticon.com/icons/svg/1688/1688063.svg" class="img-fluid" alt="Responsive image">
+                            <h4 align="center">Accesorio</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="categoriaBox" id="Ev">
 
+                            <img src="https://image.flaticon.com/icons/svg/2258/2258569.svg" class="img-fluid" alt="Responsive image">
+                            <h4 align="center">Evento</h4>
+
+                        </div>
+                    </div>
+                
+                </div>
+                @endif
             </section>
            
             

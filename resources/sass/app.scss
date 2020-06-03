@@ -1,3 +1,12 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
 .wrapper {
     display: flex;
     width: 100%;
@@ -8,7 +17,7 @@
     #sidebar {
         width: 250px;
         position: fixed;
-       top:54px;
+       top:76px;
         left: 0;
         height: 100vh;
         z-index: 999;
@@ -41,7 +50,7 @@
                     font-size: 1.1em;
                     display: block;
                     &:hover {
-                        color: #76c04e;
+                        color: #53c9bb;
                         background: #fff;
                     }
 
@@ -73,6 +82,7 @@
         top: 54;
         right: 0;
         #progressBar {
+            padding-top: 50px;
             position: relative;
             z-index: 1;
             width: 70%;
@@ -113,7 +123,7 @@
                     &.step {
                         &::after {
                             background-position: left bottom;
-                                background-color: rgb(0,128,0);
+                                background-color:#53c9bb;
                         }
                     }
                 }
@@ -127,7 +137,7 @@
                     height: 25px;
                     margin: auto;
                     left: 10%;
-                    color: #76c04e;
+                    color: #53c9bb;
                     background-color: #fff;
 
                     border-radius: 3px;
@@ -136,9 +146,9 @@
                     &::before {
                         
                         color: #fff;
-                        background-color: green;
+                        background-color: #53c9bb;
                     }
-                    color: green;
+                    color: #53c9bb;
                 }
             }
             margin: auto;
@@ -169,15 +179,15 @@
                         cursor: pointer;
                         font-family: arial;
                         &:hover {
-                            background-color: #76c04e;
+                            background-color: #53c9bb;
                             color: #fff;
                             height: 120px;
-                            outline-color: #76c04e;
+                            outline-color: #53c9bb;
                             cursor: pointer;
                         }
                     }
                     .ic {
-                        background: #76c04e;
+                        background: #53c9bb;
                         color: #fff;
                     }
                 }
@@ -194,13 +204,13 @@
             height: 230px;
             width: 200px;
             padding: 5px;
-            box-shadow: 5px 5px 10px #76c04e;
+           
             border-radius: 10px;
             h4 {
-                color: #76c04e;
+                color: #53c9bb;
             }
             &:hover {
-                background-color: #76c04e;
+                background-color: #53c9bb;
                 h4 {
                     color: white;
                 }
